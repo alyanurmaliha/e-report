@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-Report Sarana Prasarana</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- REMIX ICON CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+  
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- sidebar nav -->
+  <aside class="sidebar">
+    <div class="sidebar-top">
+      <!-- Brand Logo -->
+      <div class="sidebar-brand">
+        <div class="brand-icon">
+          <i class="ri-home-gear-fill"></i>
+        </div>
+        <div>
+          <div class="brand-title">FacilityHub</div>
+          <div class="brand-sub">Sarana Prasarana Sekolah</div>
+        </div>
+      </div>
+
+      <!-- Menu Navigation -->
+      <nav class="sidebar-menu">
+        <button id="btnNavDash" class="nav-button active" onclick="switchTab('dashboard')">
+          <i class="ri-bar-chart-box-line"></i> Dashboard
+        </button>
+        <button id="btnNavForm" class="nav-button" onclick="switchTab('form')">
+          <i class="ri-draft-line"></i> Laporkan
+        </button>
+      </nav>
+    </div>
+
+    <!-- DEKORASI SIDEBAR BAGIAN BAWAH -->
+    <div class="sidebar-bottom">
+      <!-- Card Status Layanan Sarpras -->
+      <div class="system-status-card">
+        <div class="status-header">
+          <span class="status-text">Sistem Operasional</span>
+        </div>
+        <p class="status-desc">Layanan Sarpras buka 07:00 - 15:00 WIB</p>
+      </div>
+
+      <!-- Card Bantuan / Posko Sarpras -->
+      <div class="support-card">
+        <div class="support-header">
+          <div class="support-icon">
+            <i class="ri-customer-service-2-line"></i>
+          </div>
+          <div>
+            <div class="support-title">Hubungi Posko Sarpras</div>
+            <div class="support-desc">Teknisi Penanggung Jawab</div>
+          </div>
+        </div>
+
+        <ul class="contact-list">
+          <li>
+            <span>Pak Rangga <small>(Kamar Mandi)</small></span>
+            <strong>0812-3456-7801</strong>
+          </li>
+          <li>
+            <span>Pak Agus <small>(Servis AC)</small></span>
+            <strong>0812-3456-7802</strong>
+          </li>
+          <li>
+            <span>Pak Meeng <small>(Furnitur)</small></span>
+            <strong>0812-3456-7803</strong>
+          </li>
+          <li>
+            <span>Pak Joko <small>(Internet)</small></span>
+            <strong>0812-3456-7804</strong>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT CONTAINER -->
+  <main class="main-content">
+
+    <!-- SECTION 1: DASHBOARD -->
+    <section id="sectionDashboard">
+      <!-- BANNER DENGAN WIDGET INFO DI SISI KANAN -->
+      <div class="banner">
+        <div class="banner-text">
+          <h2>Dashboard Ringkasan Tiket</h2>
+          <p>Pantau status pengerjaan dan tindak lanjut fasilitas sekolah secara realtime.</p>
+        </div>
+        <div class="banner-info">
+          <div class="info-pill">
+            <i class="ri-calendar-event-line"></i>
+            <span>Senin, 14 Oktober 2024</span>
+          </div>
+          <div class="info-pill highlight">
+            <i class="ri-checkbox-circle-line"></i>
+            <span>Sistem Aktif</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats Cards Dummy -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon total">
+            <i class="ri-file-list-3-line"></i>
+          </div>
+          <div>
+            <div class="stat-label">Total Laporan</div>
+            <div class="stat-value">05</div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon waiting">
+            <i class="ri-time-line"></i>
+          </div>
+          <div>
+            <div class="stat-label">Menunggu Proses</div>
+            <div class="stat-value">03</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Data Table Dummy -->
+      <div class="table-card">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Pelapor</th>
+              <th>Kategori</th>
+              <th>Deskripsi</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+
+          <tbody id="reports-table-body">
+            <!-- Data rows will be dynamically inserted here by JavaScript -->
+            
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- section 2 : form laporan -->
+    <section id="sectionForm" class="hidden">
+      <!-- banner nomor posko -->
+      <div class="banner">
+        <div class="banner-text">
+          <h2>Sistem Pelaporan Fasilitas Sekolah</h2>
+          <p>Laporkan kendala atau kerusakan sarana & prasarana untuk penanganan cepat dari tim Sarpras.</p>
+        </div>
+        <div class="banner-info">
+          <div class="info-pill">
+            <i class="ri-time-line"></i>
+            <span>Estimasi Respon: 1x24 Jam</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <form id="facility-report-form" onsubmit="handleFormSubmit(event)" autocomplete="off">
+          <div class="form-grid">
+            <!-- Input Nama Pelapor -->
+            <div class="form-group">
+              <label for="namaPelapor">Pelapor</label>
+              <input type="text" id="input-reporter" name="reporter" class="form-input" placeholder="Nama Lengkap / Kelas / Jabatan">
+            </div>
+
+            <!-- Input Kategori Dropdown -->
+            <div class="form-group">
+              <label for="kategoriSelect">Kategori Kerusakan</label>
+              <div class="input-wrapper">
+                <select id="select-category" name="category" class="form-select">
+                  <option value="" disabled selected>Pilih Kategori Kerusakan</option>
+                  <option value="AC">AC/Pendingin</option>
+                  <option value="Furnitur">Furnitur</option>
+                  <option value="Kamar Mandi">Kamar Mandi</option>
+                  <option value="Pintu">Pintu & Jendela</option>
+                  <option value="Komputer">Internet</option>
+                  <option value="Lainnya">Lainnya</option>
+                </select>
+                <i class="ri-arrow-down-s-line select-arrow"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Input Deskripsi Area Text -->
+          <div class="form-group" style="margin-bottom: 24px;">
+            <label for="textarea-description">Deskripsi Kerusakan</label>
+            <textarea id="textarea-description" name="description" class="form-textarea" placeholder="Jelaskan detail kerusakan fasilitas dan lokasi persisnya..." maxlength="200"></textarea>
+            <div class="char-counter">0 / 200</div>
+          </div>
+
+          <!-- Submit Button Dummy -->
+          <button type="submit" class="btn-submit">
+            KIRIM LAPORAN <i class="ri-arrow-right-line"></i>
+          </button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- JAVASCRIPT -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+
+  <script>
+    function switchTab(tab) {
+      const sectionForm = document.getElementById('sectionForm');
+      const sectionDashboard = document.getElementById('sectionDashboard');
+      const btnNavForm = document.getElementById('btnNavForm');
+      const btnNavDash = document.getElementById('btnNavDash');
+
+
+      if (tab === 'form') {
+        sectionForm.classList.remove('hidden');
+        sectionDashboard.classList.add('hidden');
+        btnNavForm.classList.add('active');
+        btnNavDash.classList.remove('active');
+      } else {
+        sectionForm.classList.add('hidden');
+        sectionDashboard.classList.remove('hidden');
+        btnNavForm.classList.remove('active');
+        btnNavDash.classList.add('active');
+      }
+    }
+  </script>
+
+
+</body>
+</html>
